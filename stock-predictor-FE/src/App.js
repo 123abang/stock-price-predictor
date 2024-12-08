@@ -1,28 +1,10 @@
-// import React from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Stock from './stockTable'
 import { TrendingUp, Brain, LineChart, Shield, Zap, ArrowRight } from 'lucide-react'
-import React, { useState, useEffect } from "react";
 // import UI from './ui'
 
 const Home = () => {
-  const [animateText, setAnimateText] = useState("");
-  useEffect(() => {
-    const text = "Predict Stock Markets with AI";
-    let index = 0;
-
-    const timer = setInterval(() => {
-      setAnimateText((prev) => prev + text[index]);
-      index++;
-      if (index >= text.length) {
-        clearInterval(timer);
-      }
-    }, 100); // Adjust speed of typing
-
-    return () => clearInterval(timer); // Cleanup on unmount
-  }, []);
-
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Hero Section */}
@@ -30,7 +12,8 @@ const Home = () => {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2">
-              <span className="text-xl font-bold">Options StockAI</span>
+              <TrendingUp className="h-6 w-6" />
+              <span className="text-xl font-bold"> Options StockAI</span>
             </div>
             <div className="flex space-x-8">
               <a href="/features" className="hover:text-indigo-200">Features</a>
@@ -38,19 +21,19 @@ const Home = () => {
             </div>
           </div>
         </nav>
-
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="writing-text">{animateText}</span>
+              Predict Stock Markets with AI
             </h1>
             <p className="text-xl text-indigo-200 mb-8">
               Advanced machine learning algorithms to help you make smarter investment decisions
             </p>
             <a href="/stocks">
-              <button className="bg-indigo-500 hover:bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
-                Get Started Free
-              </button>
+            <button className="bg-indigo-500 hover:bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+              Get Started Free
+            </button>
             </a>
           </div>
         </div>
@@ -298,4 +281,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App; 

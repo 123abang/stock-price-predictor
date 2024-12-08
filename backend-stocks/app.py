@@ -14,7 +14,7 @@ CORS(app)  # Enable CORS for all routes
 # Fetch all stocks data route
 @app.route('/api/stocks', methods=['GET'])
 def get_all_stocks():
-    url = f'https://api.polygon.io/v2/aggs/grouped/locale/us/market/stocks/2023-11-01?adjusted=true&apiKey={API_KEY}'
+    url = f'https://api.polygon.io/v2/aggs/grouped/locale/us/market/stocks/2024-10-09?adjusted=true&apiKey={API_KEY}'
     response = requests.get(url)
     
     if response.status_code == 200:
@@ -28,7 +28,7 @@ def get_all_stocks():
 # Fetch individual stock data for charting route
 @app.route('/api/stock/<ticker>', methods=['GET'])
 def get_stock_data(ticker):
-    url = f'https://api.polygon.io/v2/aggs/ticker/{ticker}/range/1/day/2023-01-01/2023-12-31?adjusted=true&apiKey={API_KEY}'
+    url = f'https://api.polygon.io/v2/aggs/ticker/{ticker}/range/1/day/2024-10-09/2024-10-31?adjusted=true&apiKey={API_KEY}'
     response = requests.get(url)
     
     if response.status_code == 200:
@@ -84,8 +84,8 @@ def get_stock_details(ticker):
 @app.route('/api/stock/<ticker>/history', methods=['GET'])
 def get_stock_history(ticker):
     # Get date range from query parameters
-    start_date = request.args.get('start', '2023-01-01')  # Default start date
-    end_date = request.args.get('end', '2023-12-31')      # Default end date
+    start_date = request.args.get('start', '2024-10-09')  # Default start date
+    end_date = request.args.get('end', '2024-10-31')      # Default end date
     
     url = f'https://api.polygon.io/v2/aggs/ticker/{ticker}/range/1/day/{start_date}/{end_date}?adjusted=true&apiKey={API_KEY}'
     response = requests.get(url)
