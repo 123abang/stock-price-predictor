@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowUpCircle, ArrowDownCircle, Search, DollarSign, TrendingUp, BarChart3 } from 'lucide-react';
+import * as Tabs from '@radix-ui/react-tabs';
+import { Card } from './card';
+import { Input } from './input';
+import { Button } from './button';
+import { Table } from './table';
 import StockChart from './stockChart';
-import { motion } from 'framer-motion';
-import { ArrowUpCircle, ArrowDownCircle, Search } from 'lucide-react';
+
 
 const TypewriterText = ({ text, className, delay = 0 }) => {
     const [displayedText, setDisplayedText] = useState('');
@@ -75,22 +81,60 @@ const StockTable = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-8">
-            <motion.div 
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="max-w-7xl mx-auto"
-            >
-                <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
-                    <TypewriterText text="Stock Market Dashboard" />
-                </h1>
-                
-                <div className="text-center text-gray-600 mb-8">
-                    <TypewriterText 
-                        text="Stock data from January 1, 2023, to December 31, 2023"
-                        delay={2.5} // Starts after the first text finishes
-                    />
-                </div>
+        <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 p-8">
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="max-w-7xl mx-auto"
+        >
+          <h1 className="text-5xl font-bold text-center text-white mb-8">
+            <TypewriterText text="Financial Market Dashboard" />
+          </h1>
+          
+          <div className="text-center text-gray-300 mb-8">
+            <TypewriterText 
+              text="Real-time stock data and market insights"
+              delay={2.5}
+            />
+          </div>
+  
+          <Card className="mb-8">
+            <div className="p-6">
+              <h2 className="text-2xl font-semibold mb-4">Market Overview</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <motion.div 
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-green-100 p-4 rounded-lg flex items-center"
+                >
+                  <DollarSign className="w-8 h-8 text-green-600 mr-3" />
+                  <div>
+                    <p className="text-sm text-green-600">Market Cap</p>
+                    <p className="text-xl font-bold text-green-800">$2.4T</p>
+                  </div>
+                </motion.div>
+                <motion.div 
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-blue-100 p-4 rounded-lg flex items-center"
+                >
+                  <TrendingUp className="w-8 h-8 text-blue-600 mr-3" />
+                  <div>
+                    <p className="text-sm text-blue-600">Trading Volume</p>
+                    <p className="text-xl font-bold text-blue-800">1.2B</p>
+                  </div>
+                </motion.div>
+                <motion.div 
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-purple-100 p-4 rounded-lg flex items-center"
+                >
+                  <BarChart3 className="w-8 h-8 text-purple-600 mr-3" />
+                  <div>
+                    <p className="text-sm text-purple-600">Active Stocks</p>
+                    <p className="text-xl font-bold text-purple-800">3,421</p>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </Card>
 
                 <div className="relative mb-8">
                     <Search className="absolute left-4 top-3 text-gray-400" />
@@ -193,4 +237,4 @@ const StockTable = () => {
     );
 };
 
-export default StockTable;
+export default StockTable;  

@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { TrendingUp, Brain, LineChart, Shield, Zap, ArrowRight } from 'lucide-react';
 import Stock from './stockTable'
-import { TrendingUp, Brain, LineChart, Shield, Zap, ArrowRight } from 'lucide-react'
-// import UI from './ui'
+
+const TypewriterText = ({ text, delay = 50 }) => {
+  const [displayText, setDisplayText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText(prev => prev + text[currentIndex]);
+        setCurrentIndex(c => c + 1);
+      }, delay);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex, text, delay]);
+
+  return <span>{displayText}</span>;
+};
 
 const Home = () => {
   return (
@@ -13,7 +30,7 @@ const Home = () => {
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2">
               <TrendingUp className="h-6 w-6" />
-              <span className="text-xl font-bold"> Options StockAI</span>
+              <span className="text-xl font-bold">Options StockAI</span>
             </div>
             <div className="flex space-x-8">
               <a href="/features" className="hover:text-indigo-200">Features</a>
@@ -21,20 +38,41 @@ const Home = () => {
             </div>
           </div>
         </nav>
-        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Predict Stock Markets with AI
+              <TypewriterText text="Predict Stock Markets with AI" />
             </h1>
             <p className="text-xl text-indigo-200 mb-8">
-              Advanced machine learning algorithms to help you make smarter investment decisions
+              <TypewriterText 
+                text="Advanced machine learning algorithms to help you make smarter investment decisions" 
+                delay={30}
+              />
             </p>
             <a href="/stocks">
-            <button className="bg-indigo-500 hover:bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
-              Get Started Free
-            </button>
+              <button className="bg-indigo-500 hover:bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                  Get Started Free
+              </button>
             </a>
+            <p className="text-xl text-indigo-200 mb-8 opacity-0 animate-fadeIn" style={{
+              animationDelay: '2s',
+              animationFillMode: 'forwards'
+            }}>
+              <TypewriterText 
+                text="Advanced machine learning algorithms to help you make smarter investment decisions" 
+                delay={30}
+              />
+            </p>
+            <div className="opacity-0 animate-fadeIn" style={{
+              animationDelay: '4s',
+              animationFillMode: 'forwards'
+            }}>
+              <a href="/stocks">
+                <button className="bg-indigo-500 hover:bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                  Get Started Free
+                </button>
+              </a>
+            </div>
           </div>
         </div>
       </header>
