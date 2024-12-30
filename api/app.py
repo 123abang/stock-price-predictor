@@ -17,6 +17,8 @@ API_KEY = os.getenv("POLYGON_API_KEY")
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+
 
 class StockPredictor:
     def __init__(self, model_type='linear'):

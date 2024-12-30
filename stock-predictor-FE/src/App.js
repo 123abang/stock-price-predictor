@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { TrendingUp, Brain, LineChart, Shield, Zap, ArrowRight } from 'lucide-react';
 import Stock from './stockTable'
+import Chatbot from './chatbot'
+import Chat from './chatgpt'
+
 
 const TypewriterText = ({ text, delay = 50 }) => {
   const [displayText, setDisplayText] = useState('');
@@ -35,6 +38,7 @@ const Home = () => {
             <div className="flex space-x-8">
               <a href="/features" className="hover:text-indigo-200">Features</a>
               <a href="#how-it-works" className="hover:text-indigo-200">How It Works</a>
+              <a href="/chatbot" className="hover:text-indigo-200">chatbot </a>
             </div>
           </div>
         </nav>
@@ -314,6 +318,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/stocks" element={<Stock />} />
+        <Route path="/chatbot" element={<Chatbot />} />
+        <Route path="/chat" element={<Chat />} />
       </Routes>
     </Router>
   );
