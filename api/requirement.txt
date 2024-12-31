@@ -1,0 +1,11 @@
+CORS
+load_dotenv
+requests
+Flask
+pd
+nd
+inMaxScaler
+rain_test_split
+LinearRegression
+KNeighborsRegressor
+timedelta
