@@ -11,9 +11,8 @@ app = Flask(__name__)
 
 # API keys from .env
 POLYGON_API_KEY = os.getenv("POLYGON_API_KEY")
-CHATGPT_API_KEY = os.getenv("CHATGPT_API_KEY")
 BASE_URL = "https://api.polygon.io/v2/aggs/ticker"
-CHATGPT_URL = "https://api.openai.com/v1/completions"
+
 
 CORS(app)  # Enable CORS for all routes
 CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
@@ -55,44 +54,6 @@ def get_stock_data():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@app.route("/ask-chatgpt", methods=["POST"])
-def ask_chatgpt():
-    """
-    Query ChatGPT for general or financial-related questions.
-    """
-    data = request.json
-    question = data.get("question")
-
-    # Validation
-    if not question:
-        return jsonify({"error": "A question is required"}), 400
-
-    headers = {
-        "Authorization": f"Bearer {CHATGPT_API_KEY}",
-        "Content-Type": "application/json"
-    }
-    payload = {
-        "model": "gpt-3.5-turbo",  # Updated model
-        "messages": [
-            {"role": "system", "content": "You are an assistant."},
-            {"role": "user", "content": question}
-        ],
-        "max_tokens": 150,  # Adjust token limit based on requirements
-        "temperature": 0.7
-    }
-
-    try:
-        # Make the request to OpenAI
-        response = requests.post(CHATGPT_URL, headers=headers, json=payload)
-        response_data = response.json()
-
-        if response.status_code == 200:
-            return jsonify({"response": response_data.get("choices", [{}])[0].get("message", {}).get("content", "").strip()})
-        else:
-            return jsonify({"error": response_data.get("error", {}).get("message", "Error querying ChatGPT")}), response.status_code
-
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
 
 
 if __name__ == "__main__":
